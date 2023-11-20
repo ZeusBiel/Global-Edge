@@ -1,0 +1,42 @@
+// Este código é apenas para copiar e colar caso necessário
+
+#define LED_PIN 2  // Pino do LED de intervenção
+#define BPM_THRESHOLD 80  // Limite de batimentos por minuto para a intervenção
+//Gabriel Oliveira Rodrigues RM98565
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  // Simula a leitura de batimentos cardíacos
+  int bpm = simularLeituraBatimentos();
+
+  // Imprime os batimentos cardíacos
+  Serial.print("Batimentos Cardíacos: ");
+  Serial.println(bpm);
+
+  // Realiza a intervenção se os batimentos cardíacos ultrapassarem o limite
+  if (bpm > BPM_THRESHOLD) {
+    realizarIntervencao();
+  }
+
+  delay(1000);  // Aguarda 1 segundo antes de obter a próxima leitura
+}
+
+int simularLeituraBatimentos() {
+  // Simula uma leitura aleatória de batimentos cardíacos entre 60 e 100 BPM
+  return random(60, 100);
+}
+
+void realizarIntervencao() {
+  Serial.println("Intervenção: Batimentos cardíacos acima do limite!");
+
+  // Ativa o LED de intervenção
+  digitalWrite(LED_PIN, HIGH);
+  delay(5000);  // Mantém o LED aceso por 5 segundos (pode ser ajustado conforme necessário)
+
+  // Desativa o LED de intervenção
+  digitalWrite(LED_PIN, LOW);
+}
